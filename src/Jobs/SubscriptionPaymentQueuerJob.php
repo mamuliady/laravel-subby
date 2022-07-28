@@ -36,7 +36,7 @@ class SubscriptionPaymentQueuerJob implements ShouldQueue
     public function handle()
     {
         $pendingPayments = new PendingPaymentCollector();
-        $pendingPayments->onDate($this->processUntil)->collectAllPayments();
+        $pendingPayments = $pendingPayments->onDate($this->processUntil)->collectAllPayments();
 
         foreach ($pendingPayments as $pendingPayment) {
             switch ($pendingPayment['collectable_type']) {
